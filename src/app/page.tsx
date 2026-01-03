@@ -23,11 +23,11 @@ export default function Home() {
       <Column 
       fillWidth 
       fillHeight 
-      minHeight="100vh" 
       horizontal="center" 
       vertical="center" 
       padding="24"
       style={{
+        minHeight: "100vh",
         background: "url('/images/cover.jpg') center/cover no-repeat",
         backgroundColor: "#0a0a0a"
       }}
