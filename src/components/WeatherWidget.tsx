@@ -58,7 +58,7 @@ export default function WeatherWidget() {
 
   return (
     <Column
-      gap="6"
+      gap="4"
       padding="12"
       radius="l"
       style={{
