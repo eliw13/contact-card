@@ -1,29 +1,20 @@
 // Profile data - all fields are optional
 const content = {
-  name: "Selene Yu", // optional
-  avatar: "/images/avatar.jpg", // optional
-  cover: "/images/cover.jpg", // optional
-  bio: "Design Engineer + Creative", // optional
-  links: [ // optional array
-    // title, description and image are generated based on the link (if available) and not provided explicitly
-    {
-      title: "Once UI", // optional
-      description: "Fully customizable design system for Next.js and Figma.", // optional
-      url: "https://once-ui.com", // required if link object exists
-      favicon: false
-    },
-    {
-      title: "Magic Portfolio", // optional
-      description: "The most awesome portfolio boilerplate built with Once UI.", // optional
-      url: "https://magic-portfolio.com", // required if link object exists
-      favicon: false
-    },
-    {
-      title: "Design Engineers Club", // optional
-      url: "https://designengineers.club", // required if link object exists
-      favicon: false
-    },
-  ],
+  name: "Eli Waterkotte",
+  jobTitle: "Applications Analyst I @ Illinois State University",
+  avatar: "/images/avatar.jpg?v=1", // Your profile picture
+  phone: "(123) 456-7890", // Add your phone number
+  email: "hello@example.com", // Add your email
+  github: "https://github.com/eliw13",
+  githubUsername: "eliw13",
+  discordId: "603480911014789121", // Your Discord User ID
+  website: "https://yourwebsite.com",
+  websiteDisplay: "yourwebsite.com",
+  linkedin: "https://linkedin.com/in/yourusername",
+  linkedinDisplay: "linkedin.com/in/yourusername",
 };
 
-export { content };
+// Social links (keeping for compatibility)
+const social = [];
+
+export { content, social };

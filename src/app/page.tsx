@@ -6,101 +6,399 @@ import {
   Row,
   Avatar,
   Text,
-  Media,
   IconButton,
-  Fade,
   Heading,
-  OgCard,
   SmartLink,
 } from "@once-ui-system/core";
-import { content, social } from "@/resources";
-
-interface LinkItem {
-  title?: string;
-  description?: string;
-  media?: string;
-  direction?: "row" | "column";
-  url: string;
-  favicon?: string | false;
-  size?: "s" | "m" | "l";
-}
+import { content } from "@/resources";
+import { FiPhone, FiMail, FiMessageCircle, FiVideo, FiGithub, FiLinkedin, FiGlobe } from "react-icons/fi";
+import WeatherWidget from "@/components/WeatherWidget";
+import DiscordWidget from "@/components/DiscordWidget";
+import CustomCursor from "@/components/CustomCursor";
 
 export default function Home() {
   return (
-    <Column fillWidth horizontal="center" padding="16">
-      <Column maxWidth="m" aspectRatio="2/1" marginBottom="40" paddingY="24">
-        {content.cover && (
-          <Row fill position="absolute" left="0" top="0" radius="xl" overflow="hidden" border="neutral-alpha-weak">
-            <Media sizes="(max-width: 768px) 100vw, 960px" priority fill src={content.cover} alt={content.name}/>
-            <Fade fill position="absolute" to="top" bottom="0" left="0" pattern={{ display: true, size: "2" }}/>
-          </Row>
-        )}
-        <Column fill center padding="l" gap="4" align="center">
-          {content.avatar && (
-            <Avatar src={content.avatar} size="xl" />
-          )}
-          {content.name && (
-            <Heading variant="heading-strong-xl" marginTop={content.avatar ? "24" : undefined}>
-              {content.name}
-            </Heading>
-          )}
-          {content.bio && (
-            <Text variant="body-default-l" onBackground="neutral-weak">
-              {content.bio}
-            </Text>
-          )}
-          {social?.length > 0 && (
-            <Row gap="16" paddingX="l" paddingTop="24" horizontal="center" fillWidth wrap>
-              {social.map((item: any, index: any) => (
-                <IconButton
-                  key={index}
-                  href={item.link}
-                  icon={item.icon}
-                  variant="ghost"
-                  size="m"
-                  tooltipPosition="bottom"
-                  tooltip={item.name}
-                />
-              ))}
-            </Row>
-          )}
+    <>
+      <CustomCursor />
+      <Column 
+      fillWidth 
+      fillHeight 
+      minHeight="100vh" 
+      horizontal="center" 
+      vertical="center" 
+      padding="24"
+      style={{
+        background: "url('/images/cover.jpg') center/cover no-repeat",
+        backgroundColor: "#0a0a0a"
+      }}
+    >
+      {/* iOS Contact Card Container - Frosted Glass */}
+      <Column 
+        radius="xl" 
+        padding="32"
+        gap="24"
+        style={{
+          width: "450px",
+          background: "rgba(28, 28, 30, 0.65)",
+          backdropFilter: "blur(40px) saturate(180%)",
+          WebkitBackdropFilter: "blur(40px) saturate(180%)",
+          border: "1px solid rgba(255, 255, 255, 0.1)",
+          boxShadow: "0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+        }}
+      >
+        {/* Profile Photo */}
+        <Column fillWidth horizontal="center">
+          <div style={{
+            padding: "4px",
+            background: "linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))",
+            borderRadius: "50%",
+            border: "2px solid rgba(255, 255, 255, 0.2)"
+          }}>
+            {content.avatar && (
+              <Avatar src={content.avatar} size="xl" style={{ width: "110px", height: "110px" }} />
+            )}
+          </div>
         </Column>
-      </Column>
-      
-      <Column maxWidth="s" gap="24">
-        {content.links?.length > 0 && (
-          <>
-            {(content.links as LinkItem[]).map((link, index) => (
-              <OgCard
-                background="transparent"
-                border="transparent"
-                sizes="(max-width: 768px) 100vw, 768px"
-                key={index}
-                url={link.url}
-                href={link.url}
-                direction={link.direction}
-                title={link.title}
-                description={link.description}
-                favicon={link.favicon}
-                image={link.media}
-                size={link.size || "m"}
-              />
-            ))}
-          </>
-        )}
-        <Row fillWidth padding="l" horizontal="center" textVariant="label-default-s">
-          <Text onBackground="neutral-weak">
-            {new Date().getFullYear() + " "}
-            {/* Usage of this template requires attribution. Please don't remove the link to Once UI. */}
-            / Build your bio with{" "}
-            <SmartLink
-              href="https://once-ui.com/products/magic-bio"
+
+        {/* iOS Widgets Row - Weather and Date */}
+        <Row fillWidth horizontal="center" gap="12" paddingX="16">
+          {/* Weather Widget */}
+          <WeatherWidget />
+
+          {/* Date Widget */}
+          <Column
+            gap="4"
+            padding="12"
+            radius="l"
+            style={{
+              background: "rgba(255, 255, 255, 0.15)",
+              border: "1px solid rgba(255, 255, 255, 0.2)",
+              minWidth: "90px",
+              alignItems: "center"
+            }}
+          >
+            <Text 
+              variant="label-default-s" 
+              style={{ 
+                color: "rgba(255, 255, 255, 0.9)",
+                fontSize: "11px"
+              }}
             >
-              Once UI
-            </SmartLink>
-          </Text>
+              {new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short' }).toUpperCase()}
+            </Text>
+            <Text 
+              variant="heading-strong-xl" 
+              style={{ 
+                color: "white",
+                fontSize: "32px",
+                lineHeight: "1"
+              }}
+            >
+              {new Date().getDate()}
+            </Text>
+          </Column>
         </Row>
+
+        {/* Name */}
+        <Column fillWidth horizontal="center">
+          <Heading 
+            variant="heading-strong-xl" 
+            align="center"
+            style={{ color: "white" }}
+          >
+            {content.name || "Eli Waterkotte"}
+          </Heading>
+        </Column>
+
+        {/* Job Title / Bio */}
+        <Column fillWidth horizontal="center" paddingX="16">
+          <Text 
+            variant="body-default-m" 
+            align="center"
+            style={{ color: "rgba(255, 255, 255, 0.7)" }}
+          >
+            {content.jobTitle || "Applications Analyst I @ Illinois State University"}
+          </Text>
+        </Column>
+
+
+        {/* Contact Actions Row */}
+        <Row fillWidth gap="16" horizontal="center" paddingTop="8">
+          <Column gap="8" horizontal="center">
+            <div style={{
+              width: "56px",
+              height: "56px",
+              borderRadius: "50%",
+              background: "rgba(255, 255, 255, 0.1)",
+              border: "1px solid rgba(255, 255, 255, 0.2)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              transition: "all 0.2s ease"
+            }}
+            className="contact-button"
+            >
+              <FiMessageCircle size={20} color="white" />
+            </div>
+            <Text variant="label-default-xs" style={{ color: "rgba(255, 255, 255, 0.5)" }}>
+              MESSAGE
+            </Text>
+          </Column>
+
+          <Column gap="8" horizontal="center">
+            <a href={`tel:${content.phone}`} style={{ textDecoration: "none" }}>
+              <div style={{
+                width: "56px",
+                height: "56px",
+                borderRadius: "50%",
+                background: "rgba(255, 255, 255, 0.1)",
+                border: "1px solid rgba(255, 255, 255, 0.2)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                transition: "all 0.2s ease"
+              }}
+              className="contact-button"
+              >
+                <FiPhone size={20} color="white" />
+              </div>
+            </a>
+            <Text variant="label-default-xs" style={{ color: "rgba(255, 255, 255, 0.5)" }}>
+              CALL
+            </Text>
+          </Column>
+
+          <Column gap="8" horizontal="center">
+            <div style={{
+              width: "56px",
+              height: "56px",
+              borderRadius: "50%",
+              background: "rgba(255, 255, 255, 0.1)",
+              border: "1px solid rgba(255, 255, 255, 0.2)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              transition: "all 0.2s ease"
+            }}
+            className="contact-button"
+            >
+              <FiVideo size={20} color="white" />
+            </div>
+            <Text variant="label-default-xs" style={{ color: "rgba(255, 255, 255, 0.5)" }}>
+              VIDEO
+            </Text>
+          </Column>
+
+          <Column gap="8" horizontal="center">
+            <a href={`mailto:${content.email}`} style={{ textDecoration: "none" }}>
+              <div style={{
+                width: "56px",
+                height: "56px",
+                borderRadius: "50%",
+                background: "rgba(255, 255, 255, 0.1)",
+                border: "1px solid rgba(255, 255, 255, 0.2)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                transition: "all 0.2s ease"
+              }}
+              className="contact-button"
+              >
+                <FiMail size={20} color="white" />
+              </div>
+            </a>
+            <Text variant="label-default-xs" style={{ color: "rgba(255, 255, 255, 0.5)" }}>
+              MAIL
+            </Text>
+          </Column>
+        </Row>
+
+        {/* Divider */}
+        <div style={{ 
+          width: "100%", 
+          height: "1px", 
+          background: "rgba(255, 255, 255, 0.1)",
+          marginTop: "8px"
+        }} />
+
+        {/* Mobile */}
+        <Column fillWidth gap="4">
+          <Text 
+            variant="label-default-xs" 
+            style={{ 
+              color: "rgba(255, 255, 255, 0.5)",
+              textTransform: "uppercase",
+              letterSpacing: "0.05em"
+            }}
+          >
+            MOBILE
+          </Text>
+          <a href={`tel:${content.phone}`} style={{ textDecoration: "none" }}>
+            <Text variant="body-default-m" style={{ color: "#3b82f6" }}>
+              {content.phone || "(123) 456-7890"}
+            </Text>
+          </a>
+        </Column>
+
+        {/* Email */}
+        <Column fillWidth gap="4">
+          <Text 
+            variant="label-default-xs" 
+            style={{ 
+              color: "rgba(255, 255, 255, 0.5)",
+              textTransform: "uppercase",
+              letterSpacing: "0.05em"
+            }}
+          >
+            EMAIL
+          </Text>
+          <a href={`mailto:${content.email}`} style={{ textDecoration: "none" }}>
+            <Text variant="body-default-m" style={{ color: "#3b82f6" }}>
+              {content.email || "hello@example.com"}
+            </Text>
+          </a>
+        </Column>
+
+        {/* Divider */}
+        <div style={{ width: "100%", height: "1px", background: "rgba(255, 255, 255, 0.1)" }} />
+
+        {/* GitHub */}
+        <a href={content.github} style={{ textDecoration: "none", width: "100%" }}>
+          <Row 
+            fillWidth 
+            gap="12" 
+            paddingY="12" 
+            paddingX="16" 
+            radius="l"
+            align="center"
+            style={{ 
+              background: "rgba(255, 255, 255, 0.05)",
+              border: "1px solid rgba(255, 255, 255, 0.1)",
+              cursor: "pointer",
+              transition: "all 0.2s ease"
+            }}
+            className="link-card"
+          >
+            <div style={{
+              width: "40px",
+              height: "40px",
+              borderRadius: "50%",
+              background: "white",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0
+            }}>
+              <FiGithub size={20} color="black" />
+            </div>
+            <Column gap="2" style={{ flex: 1, minWidth: 0 }} align="start">
+              <Text variant="label-default-s" style={{ color: "rgba(255, 255, 255, 0.5)" }}>
+                GITHUB
+              </Text>
+              <Text variant="body-default-s" style={{ color: "white" }}>
+                @{content.githubUsername || "yourusername"}
+              </Text>
+            </Column>
+            <div style={{ marginLeft: "auto", flexShrink: 0 }}>
+              <Text style={{ color: "rgba(255, 255, 255, 0.3)" }}>›</Text>
+            </div>
+          </Row>
+        </a>
+
+        {/* Discord */}
+        <DiscordWidget userId={content.discordId || ""} />
+
+        {/* Website */}
+        <a href={content.website} style={{ textDecoration: "none", width: "100%" }}>
+          <Row 
+            fillWidth 
+            gap="12" 
+            paddingY="12" 
+            paddingX="16" 
+            radius="l"
+            align="center"
+            style={{ 
+              background: "rgba(255, 255, 255, 0.05)",
+              border: "1px solid rgba(255, 255, 255, 0.1)",
+              cursor: "pointer",
+              transition: "all 0.2s ease"
+            }}
+            className="link-card"
+          >
+            <div style={{
+              width: "40px",
+              height: "40px",
+              borderRadius: "50%",
+              background: "rgba(255, 255, 255, 0.1)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0
+            }}>
+              <FiGlobe size={20} color="white" />
+            </div>
+            <Column gap="2" style={{ flex: 1, minWidth: 0 }} align="start">
+              <Text variant="label-default-s" style={{ color: "rgba(255, 255, 255, 0.5)" }}>
+                WEBSITE
+              </Text>
+              <Text variant="body-default-s" style={{ color: "white" }}>
+                {content.websiteDisplay || "yourwebsite.com"}
+              </Text>
+            </Column>
+            <div style={{ marginLeft: "auto", flexShrink: 0 }}>
+              <Text style={{ color: "rgba(255, 255, 255, 0.3)" }}>›</Text>
+            </div>
+          </Row>
+        </a>
+
+        {/* LinkedIn */}
+        <a href={content.linkedin} style={{ textDecoration: "none", width: "100%" }}>
+          <Row 
+            fillWidth 
+            gap="12" 
+            paddingY="12" 
+            paddingX="16" 
+            radius="l"
+            align="center"
+            style={{ 
+              background: "rgba(255, 255, 255, 0.05)",
+              border: "1px solid rgba(255, 255, 255, 0.1)",
+              cursor: "pointer",
+              transition: "all 0.2s ease"
+            }}
+            className="link-card"
+          >
+            <div style={{
+              width: "40px",
+              height: "40px",
+              borderRadius: "50%",
+              background: "#0077b5",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0
+            }}>
+              <FiLinkedin size={20} color="white" />
+            </div>
+            <Column gap="2" style={{ flex: 1, minWidth: 0 }} align="start">
+              <Text variant="label-default-s" style={{ color: "rgba(255, 255, 255, 0.5)" }}>
+                LINKEDIN
+              </Text>
+              <Text variant="body-default-s" style={{ color: "white" }}>
+                {content.linkedinDisplay || "linkedin.com/in/you"}
+              </Text>
+            </Column>
+            <div style={{ marginLeft: "auto", flexShrink: 0 }}>
+              <Text style={{ color: "rgba(255, 255, 255, 0.3)" }}>›</Text>
+            </div>
+          </Row>
+        </a>
       </Column>
     </Column>
+    </>
   );
 }
