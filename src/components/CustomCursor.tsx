@@ -7,8 +7,11 @@ export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+
     const updateCursor = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
       setIsVisible(true);
@@ -61,6 +64,11 @@ export default function CustomCursor() {
       document.body.removeEventListener("mouseenter", handleMouseEnter);
     };
   }, []);
+
+  // Don't render anything until mounted (prevents hydration errors)
+  if (!isMounted) {
+    return null;
+  }
 
   const size = isHovering ? 40 : 28;
 

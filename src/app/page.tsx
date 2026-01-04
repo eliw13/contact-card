@@ -18,8 +18,59 @@ import CustomCursor from "@/components/CustomCursor";
 import AuthButton from "@/components/AuthButton";
 import { generateVCF, downloadVCF, shareContact } from "@/utils/contactUtils";
 import { FiDownload, FiShare2 } from "react-icons/fi";
+import { useEffect } from "react";
 
 export default function Home() {
+  // Track page views
+  useEffect(() => {
+    const views = localStorage.getItem('pageViews');
+    const currentViews = views ? parseInt(views) : 0;
+    localStorage.setItem('pageViews', (currentViews + 1).toString());
+
+    // Track monthly views
+    const currentMonth = new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+    const monthlyData = localStorage.getItem('monthlyPageViews');
+    
+    if (monthlyData) {
+      const data = JSON.parse(monthlyData);
+      const monthIndex = data.findIndex((item: { month: string; views: number }) => item.month === currentMonth);
+      
+      if (monthIndex !== -1) {
+        // Month exists, increment views
+        data[monthIndex].views += 1;
+      } else {
+        // New month - add it
+        data.push({ month: currentMonth, views: 1 });
+        
+        // Clean up: remove months from previous years (keep only current year)
+        const currentYear = new Date().getFullYear();
+        const filteredData = data.filter((item: { month: string; views: number }) => {
+          const itemYear = parseInt(item.month.split(' ')[1]);
+          return itemYear >= currentYear;
+        });
+        
+        localStorage.setItem('monthlyPageViews', JSON.stringify(filteredData));
+        return;
+      }
+      
+      localStorage.setItem('monthlyPageViews', JSON.stringify(data));
+    }
+  }, []);
+
+  // Secret admin shortcut for localhost (Ctrl+Shift+A)
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          window.location.href = '/admin';
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, []);
+
   const handleSaveContact = () => {
     const vcf = generateVCF({
       name: content.name,
