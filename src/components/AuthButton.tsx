@@ -10,6 +10,9 @@ export default function AuthButton() {
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
 
+  console.log('AuthButton status:', status);
+  console.log('AuthButton session:', session);
+
   // Show nothing while loading
   if (status === "loading") {
     return null;
@@ -18,10 +21,38 @@ export default function AuthButton() {
   // User is signed in and is admin
   if (session?.user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
     return (
-      <div className="auth-button-container">
+      <div 
+        className="auth-button-container"
+        style={{
+          position: 'fixed',
+          top: '20px',
+          right: '20px',
+          zIndex: 1000,
+          display: 'flex',
+          gap: '12px',
+          alignItems: 'center',
+        }}
+      >
         <button
           onClick={() => router.push('/admin')}
           className="auth-button admin-button"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '12px 20px',
+            borderRadius: '12px',
+            background: 'rgba(59, 130, 246, 0.2)',
+            backdropFilter: 'blur(40px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+            border: '1px solid rgba(59, 130, 246, 0.3)',
+            color: 'white',
+            fontSize: '14px',
+            fontWeight: 500,
+            cursor: 'pointer',
+            transition: 'all 0.2s ease',
+            boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)',
+          }}
         >
           <FiSettings size={18} />
           <span>Admin Dashboard</span>
@@ -29,6 +60,20 @@ export default function AuthButton() {
         <button
           onClick={() => signOut()}
           className="auth-button signout-button"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            padding: '12px',
+            borderRadius: '12px',
+            background: 'rgba(28, 28, 30, 0.8)',
+            backdropFilter: 'blur(40px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            color: 'white',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease',
+            boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)',
+          }}
         >
           <FiLogOut size={18} />
         </button>
@@ -40,8 +85,32 @@ export default function AuthButton() {
   return (
     <>
       <button
-        onClick={() => setShowModal(true)}
+        onClick={() => {
+          console.log('Sign in button clicked!');
+          setShowModal(true);
+        }}
         className="auth-button signin-button"
+        style={{
+          position: 'fixed',
+          top: '20px',
+          right: '20px',
+          zIndex: 1000,
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          padding: '12px 20px',
+          borderRadius: '12px',
+          background: 'rgba(28, 28, 30, 0.8)',
+          backdropFilter: 'blur(40px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          color: 'white',
+          fontSize: '14px',
+          fontWeight: 500,
+          cursor: 'pointer',
+          transition: 'all 0.2s ease',
+          boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)',
+        }}
       >
         <FiLogIn size={18} />
         <span>Sign In</span>
