@@ -473,7 +473,7 @@ export default function AdminDashboard() {
                 </Text>
               </Row>
               
-              <Row fillWidth horizontal="space-between" align="center">
+              <Row fillWidth horizontal="between" align="center">
                 <Text style={{ color: "rgba(255, 255, 255, 0.7)", fontSize: "14px" }}>
                   Degraded
                 </Text>
@@ -482,7 +482,7 @@ export default function AdminDashboard() {
                 </Text>
               </Row>
               
-              <Row fillWidth horizontal="space-between" align="center">
+              <Row fillWidth horizontal="between" align="center">
                 <Text style={{ color: "rgba(255, 255, 255, 0.7)", fontSize: "14px" }}>
                   Down
                 </Text>
