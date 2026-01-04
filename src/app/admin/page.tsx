@@ -331,7 +331,7 @@ export default function AdminDashboard() {
         {/* Discord Status */}
         <div className="bento-card">
           <div className="bento-card-content">
-            <Row fillWidth horizontal="space-between" align="center">
+            <Row fillWidth horizontal="between" align="center">
               <SiDiscord size={28} color="#5865F2" />
               <div className="status-indicator" style={{ 
                 backgroundColor: getStatusColor(discordStatus.status)
@@ -354,7 +354,7 @@ export default function AdminDashboard() {
         {/* GitHub Status */}
         <div className="bento-card">
           <div className="bento-card-content">
-            <Row fillWidth horizontal="space-between" align="center">
+            <Row fillWidth horizontal="between" align="center">
               <FiGithub size={28} color="white" />
               <div className="status-indicator" style={{ 
                 backgroundColor: getStatusColor(githubStatus.status)
@@ -377,7 +377,7 @@ export default function AdminDashboard() {
         {/* Weather & Date Status */}
         <div className="bento-card">
           <div className="bento-card-content">
-            <Row fillWidth horizontal="space-between" align="center">
+            <Row fillWidth horizontal="between" align="center">
               <FiCloud size={28} color="#60a5fa" />
               <div className="status-indicator" style={{ 
                 backgroundColor: getStatusColor(weatherStatus.status)
@@ -400,7 +400,7 @@ export default function AdminDashboard() {
         {/* Date Widget Status */}
         <div className="bento-card">
           <div className="bento-card-content">
-            <Row fillWidth horizontal="space-between" align="center">
+            <Row fillWidth horizontal="between" align="center">
               <FiCalendar size={28} color="#a78bfa" />
               <div className="status-indicator" style={{ 
                 backgroundColor: '#10b981' // Always operational (client-side)
@@ -464,7 +464,7 @@ export default function AdminDashboard() {
             </Heading>
             
             <Column gap="12" fillWidth>
-              <Row fillWidth horizontal="space-between" align="center">
+              <Row fillWidth horizontal="between" align="center">
                 <Text style={{ color: "rgba(255, 255, 255, 0.7)", fontSize: "14px" }}>
                   Operational
                 </Text>
@@ -515,7 +515,7 @@ export default function AdminDashboard() {
           onClick={(e) => e.stopPropagation()}
           style={{ maxWidth: '800px', width: '90%', padding: '32px' }}
         >
-          <Row fillWidth horizontal="space-between" align="center" style={{ marginBottom: '24px' }}>
+          <Row fillWidth horizontal="between" align="center" style={{ marginBottom: '24px' }}>
             <Heading variant="heading-strong-l" style={{ color: "white" }}>
               Monthly Page Views
             </Heading>
