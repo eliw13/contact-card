@@ -7,6 +7,7 @@ import classNames from "classnames";
 import { baseURL, meta, og, effects, fonts, style, dataStyle } from "@/resources/once-ui.config";
 import { Background, Column, Flex, opacity, Schema, SpacingToken } from "@once-ui-system/core";
 import { Providers } from "@/components/Providers";
+import AuthProvider from "@/components/AuthProvider";
 import { Meta } from "@once-ui-system/core";
 
 export async function generateMetadata() {
@@ -105,7 +106,8 @@ export default function RootLayout({
         />
       </head>
       <Providers>
-        <Column as="body" 
+        <AuthProvider>
+          <Column as="body" 
           background="page" 
           fillWidth  
           margin="0" 
@@ -153,6 +155,7 @@ export default function RootLayout({
           />
           {children}
         </Column>
+        </AuthProvider>
       </Providers>
     </Flex>
   );

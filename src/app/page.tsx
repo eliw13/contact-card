@@ -15,6 +15,7 @@ import { FiPhone, FiMail, FiMessageCircle, FiVideo, FiGithub, FiLinkedin, FiGlob
 import WeatherWidget from "@/components/WeatherWidget";
 import DiscordWidget from "@/components/DiscordWidget";
 import CustomCursor from "@/components/CustomCursor";
+import AuthButton from "@/components/AuthButton";
 import { generateVCF, downloadVCF, shareContact } from "@/utils/contactUtils";
 import { FiDownload, FiShare2 } from "react-icons/fi";
 
@@ -39,6 +40,7 @@ export default function Home() {
   return (
     <>
       <CustomCursor />
+      <AuthButton />
       <Column 
       fillWidth 
       fillHeight 
