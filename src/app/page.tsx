@@ -15,8 +15,27 @@ import { FiPhone, FiMail, FiMessageCircle, FiVideo, FiGithub, FiLinkedin, FiGlob
 import WeatherWidget from "@/components/WeatherWidget";
 import DiscordWidget from "@/components/DiscordWidget";
 import CustomCursor from "@/components/CustomCursor";
+import { generateVCF, downloadVCF, shareContact } from "@/utils/contactUtils";
+import { FiDownload, FiShare2 } from "react-icons/fi";
 
 export default function Home() {
+  const handleSaveContact = () => {
+    const vcf = generateVCF({
+      name: content.name,
+      jobTitle: content.jobTitle,
+      phone: content.phone,
+      email: content.email,
+      website: content.website,
+      github: content.github,
+      linkedin: content.linkedin,
+    });
+    downloadVCF(vcf, `${content.name.replace(' ', '_')}.vcf`);
+  };
+
+  const handleShareContact = () => {
+    shareContact('https://your-domain.com', content.name);
+  };
+
   return (
     <>
       <CustomCursor />
@@ -121,101 +140,6 @@ export default function Home() {
           </Text>
         </Column>
 
-
-        {/* Contact Actions Row */}
-        <Row fillWidth gap="16" horizontal="center" paddingTop="8">
-          <Column gap="8" horizontal="center">
-            <div style={{
-              width: "56px",
-              height: "56px",
-              borderRadius: "50%",
-              background: "rgba(255, 255, 255, 0.1)",
-              border: "1px solid rgba(255, 255, 255, 0.2)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-              transition: "all 0.2s ease"
-            }}
-            className="contact-button"
-            >
-              <FiMessageCircle size={20} color="white" />
-            </div>
-            <Text variant="label-default-xs" style={{ color: "rgba(255, 255, 255, 0.5)" }}>
-              MESSAGE
-            </Text>
-          </Column>
-
-          <Column gap="8" horizontal="center">
-            <a href={`tel:${content.phone}`} style={{ textDecoration: "none" }}>
-              <div style={{
-                width: "56px",
-                height: "56px",
-                borderRadius: "50%",
-                background: "rgba(255, 255, 255, 0.1)",
-                border: "1px solid rgba(255, 255, 255, 0.2)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-                transition: "all 0.2s ease"
-              }}
-              className="contact-button"
-              >
-                <FiPhone size={20} color="white" />
-              </div>
-            </a>
-            <Text variant="label-default-xs" style={{ color: "rgba(255, 255, 255, 0.5)" }}>
-              CALL
-            </Text>
-          </Column>
-
-          <Column gap="8" horizontal="center">
-            <div style={{
-              width: "56px",
-              height: "56px",
-              borderRadius: "50%",
-              background: "rgba(255, 255, 255, 0.1)",
-              border: "1px solid rgba(255, 255, 255, 0.2)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-              transition: "all 0.2s ease"
-            }}
-            className="contact-button"
-            >
-              <FiVideo size={20} color="white" />
-            </div>
-            <Text variant="label-default-xs" style={{ color: "rgba(255, 255, 255, 0.5)" }}>
-              VIDEO
-            </Text>
-          </Column>
-
-          <Column gap="8" horizontal="center">
-            <a href={`mailto:${content.email}`} style={{ textDecoration: "none" }}>
-              <div style={{
-                width: "56px",
-                height: "56px",
-                borderRadius: "50%",
-                background: "rgba(255, 255, 255, 0.1)",
-                border: "1px solid rgba(255, 255, 255, 0.2)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-                transition: "all 0.2s ease"
-              }}
-              className="contact-button"
-              >
-                <FiMail size={20} color="white" />
-              </div>
-            </a>
-            <Text variant="label-default-xs" style={{ color: "rgba(255, 255, 255, 0.5)" }}>
-              MAIL
-            </Text>
-          </Column>
-        </Row>
 
         {/* Divider */}
         <div style={{ 
@@ -397,6 +321,213 @@ export default function Home() {
             </div>
           </Row>
         </a>
+
+        {/* Skills Section */}
+        <Column fillWidth gap="16" paddingTop="16">
+          {/* Languages */}
+          <Column fillWidth gap="8">
+            <Text 
+              variant="label-default-xs" 
+              style={{ 
+                color: "rgba(255, 255, 255, 0.5)",
+                textTransform: "uppercase",
+                letterSpacing: "0.05em"
+              }}
+            >
+              LANGUAGES
+            </Text>
+            <Row fillWidth gap="8" wrap>
+              {["CSS", "HTML", "JavaScript", "Python", "Java", "C#", "PowerShell"].map((skill) => (
+                <div
+                  key={skill}
+                  style={{
+                    padding: "6px 12px",
+                    borderRadius: "6px",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                  }}
+                >
+                  <Text variant="body-default-s" style={{ color: "white" }}>
+                    {skill}
+                  </Text>
+                </div>
+              ))}
+            </Row>
+          </Column>
+
+          {/* Frontend */}
+          <Column fillWidth gap="8">
+            <Text 
+              variant="label-default-xs" 
+              style={{ 
+                color: "rgba(255, 255, 255, 0.5)",
+                textTransform: "uppercase",
+                letterSpacing: "0.05em"
+              }}
+            >
+              FRONTEND
+            </Text>
+            <Row fillWidth gap="8" wrap>
+              {["React", "Next.js"].map((skill) => (
+                <div
+                  key={skill}
+                  style={{
+                    padding: "6px 12px",
+                    borderRadius: "6px",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                  }}
+                >
+                  <Text variant="body-default-s" style={{ color: "white" }}>
+                    {skill}
+                  </Text>
+                </div>
+              ))}
+            </Row>
+          </Column>
+
+          {/* Backend */}
+          <Column fillWidth gap="8">
+            <Text 
+              variant="label-default-xs" 
+              style={{ 
+                color: "rgba(255, 255, 255, 0.5)",
+                textTransform: "uppercase",
+                letterSpacing: "0.05em"
+              }}
+            >
+              BACKEND
+            </Text>
+            <Row fillWidth gap="8" wrap>
+              {["Node.js", "REST APIs", "Discord.js"].map((skill) => (
+                <div
+                  key={skill}
+                  style={{
+                    padding: "6px 12px",
+                    borderRadius: "6px",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                  }}
+                >
+                  <Text variant="body-default-s" style={{ color: "white" }}>
+                    {skill}
+                  </Text>
+                </div>
+              ))}
+            </Row>
+          </Column>
+
+          {/* Databases */}
+          <Column fillWidth gap="8">
+            <Text 
+              variant="label-default-xs" 
+              style={{ 
+                color: "rgba(255, 255, 255, 0.5)",
+                textTransform: "uppercase",
+                letterSpacing: "0.05em"
+              }}
+            >
+              DATABASES
+            </Text>
+            <Row fillWidth gap="8" wrap>
+              {["SQL", "Supabase", "Firebase"].map((skill) => (
+                <div
+                  key={skill}
+                  style={{
+                    padding: "6px 12px",
+                    borderRadius: "6px",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                  }}
+                >
+                  <Text variant="body-default-s" style={{ color: "white" }}>
+                    {skill}
+                  </Text>
+                </div>
+              ))}
+            </Row>
+          </Column>
+
+          {/* DevOps & Tools */}
+          <Column fillWidth gap="8">
+            <Text 
+              variant="label-default-xs" 
+              style={{ 
+                color: "rgba(255, 255, 255, 0.5)",
+                textTransform: "uppercase",
+                letterSpacing: "0.05em"
+              }}
+            >
+              DEVOPS & TOOLS
+            </Text>
+            <Row fillWidth gap="8" wrap>
+              {["Git/GitHub", "SCCM", "Active Directory", "ServiceNow"].map((skill) => (
+                <div
+                  key={skill}
+                  style={{
+                    padding: "6px 12px",
+                    borderRadius: "6px",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                  }}
+                >
+                  <Text variant="body-default-s" style={{ color: "white" }}>
+                    {skill}
+                  </Text>
+                </div>
+              ))}
+            </Row>
+          </Column>
+        </Column>
+
+        {/* Action Buttons */}
+        <Row fillWidth gap="12" paddingTop="24">
+          <button
+            onClick={handleSaveContact}
+            style={{
+              flex: 1,
+              padding: "14px",
+              borderRadius: "12px",
+              background: "rgba(255, 255, 255, 0.1)",
+              border: "1px solid rgba(255, 255, 255, 0.2)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "8px",
+              cursor: "pointer",
+              transition: "all 0.2s ease",
+            }}
+            className="contact-button"
+          >
+            <FiDownload size={18} color="white" />
+            <Text variant="body-default-m" style={{ color: "white", fontWeight: 500 }}>
+              Save Contact
+            </Text>
+          </button>
+
+          <button
+            onClick={handleShareContact}
+            style={{
+              flex: 1,
+              padding: "14px",
+              borderRadius: "12px",
+              background: "rgba(255, 255, 255, 0.1)",
+              border: "1px solid rgba(255, 255, 255, 0.2)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "8px",
+              cursor: "pointer",
+              transition: "all 0.2s ease",
+            }}
+            className="contact-button"
+          >
+            <FiShare2 size={18} color="white" />
+            <Text variant="body-default-m" style={{ color: "white", fontWeight: 500 }}>
+              Share Contact
+            </Text>
+          </button>
+        </Row>
       </Column>
     </Column>
     </>

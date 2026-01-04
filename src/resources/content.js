@@ -1,7 +1,7 @@
 // Profile data - all fields are optional
 const content = {
   name: "Eli Waterkotte",
-  jobTitle: "Applications Analyst I @ Illinois State University",
+  jobTitle: "Applications Analyst @ Illinois State University",
   avatar: "/images/avatar.jpg?v=1", // Your profile picture
   phone: "(123) 456-7890", // Add your phone number
   email: "hello@example.com", // Add your email
