@@ -1,4 +1,4 @@
-const baseURL = "https://yourlink.bio";
+const baseURL = "https://eliw-card.com";
 
 // Import and set font for each variant
 import { Geist } from "next/font/google";

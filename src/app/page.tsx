@@ -34,7 +34,7 @@ export default function Home() {
   };
 
   const handleShareContact = () => {
-    shareContact('https://your-domain.com', content.name);
+    shareContact('https://eliw-card.com', content.name);
   };
 
   return (
