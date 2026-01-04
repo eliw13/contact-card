@@ -44,7 +44,7 @@ export default function Home() {
       fillHeight 
       horizontal="center" 
       vertical="center" 
-      padding="24"
+      padding="12"
       style={{
         minHeight: "100vh",
         background: "url('/images/cover.jpg') center/cover no-repeat",
@@ -56,8 +56,10 @@ export default function Home() {
         radius="xl" 
         padding="32"
         gap="24"
+        className="contact-card"
         style={{
-          width: "450px",
+          width: "100%",
+          maxWidth: "450px",
           background: "rgba(28, 28, 30, 0.65)",
           backdropFilter: "blur(40px) saturate(180%)",
           WebkitBackdropFilter: "blur(40px) saturate(180%)",
@@ -80,7 +82,7 @@ export default function Home() {
         </Column>
 
         {/* iOS Widgets Row - Weather and Date */}
-        <Row fillWidth horizontal="center" gap="12" paddingX="16">
+        <Row fillWidth horizontal="center" gap="12" paddingX="16" className="widgets-row">
           {/* Weather Widget */}
           <WeatherWidget />
 

@@ -61,3 +61,23 @@ body {
     display: none;
   }
 }
+
+/* Mobile responsive adjustments */
+@media (max-width: 480px) {
+  /* Reduce card padding on mobile */
+  .contact-card {
+    padding: 20px !important;
+    gap: 16px !important;
+  }
+  
+  /* Make widgets stack better */
+  .widgets-row {
+    gap: 8px !important;
+  }
+  
+  /* Adjust avatar size */
+  .avatar-container {
+    width: 90px !important;
+    height: 90px !important;
+  }
+}

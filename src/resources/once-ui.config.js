@@ -106,10 +106,10 @@ const effects = {
 
 // default metadata
 const meta = {
-  title: "Selene Yu - Bio",
+  title: "Eli W - Contact Card",
   path: "/",
   description:
-    "My name is Selene Yu, I'm a Design Engineer and Creative.",
+    "Contact information for Eli Waterkotte, Applications Analyst at Illinois State University.",
 };
 
 // default open graph data
